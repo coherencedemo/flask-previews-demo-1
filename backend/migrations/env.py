@@ -24,7 +24,7 @@ target_metadata = db.metadata
 
 def run_migrations_offline() -> None:
     """Run migrations in 'offline' mode."""
-    url = os.environ.get("DATABASE_URL")
+    url = os.environ.get("MY_DATABASE_URL")
     context.configure(
         url=url,
         target_metadata=target_metadata,
@@ -38,7 +38,7 @@ def run_migrations_offline() -> None:
 def run_migrations_online() -> None:
     """Run migrations in 'online' mode."""
     configuration = config.get_section(config.config_ini_section)
-    configuration["sqlalchemy.url"] = os.environ.get("DATABASE_URL")
+    configuration["sqlalchemy.url"] = os.environ.get("MY_DATABASE_URL")
     connectable = engine_from_config(
         configuration,
         prefix="sqlalchemy.",
@@ -66,6 +66,6 @@ config = context.config
 fileConfig(config.config_file_name)
 
 # Override sqlalchemy.url path
-database_url = os.environ.get('DATABASE_URL')
+database_url = os.environ.get('MY_DATABASE_URL')
 if database_url:
     config.set_main_option('sqlalchemy.url', database_url)
